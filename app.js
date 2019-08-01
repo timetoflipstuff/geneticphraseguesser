@@ -1,6 +1,6 @@
-let populationLength = 100;
-let parentsNum = 10;
-let mutationChance = 0.2;
+let populationLength = 200;
+let parentsNum = 40;
+let mutationIndex = 0.2; // How many characters per a hundred will mutate each generation
 // Edit the parameters above to tweak the performance of the algorithm
 let population = [];
 let isGuessing = false;
@@ -27,6 +27,7 @@ let clearPop = () => {
 }
 
 let setup = phraseLength => {
+    generationCount = 0;
     clearPop();
     for (let i = 0; i < populationLength; i++) {
         for (let j = 0; j < phraseLength; j++) {
@@ -76,7 +77,7 @@ let draw = (phraseLength, actualPhrase) => {
     clearPop();
     for (i = 0; i < populationLength; i++) {
         for (j = 0; j < phraseLength; j++) {
-            ((Math.random() * 100) > 1) ? population[i] += parents[Math.floor(Math.random()*parentsNum)][j] : population[i] += keys[Math.floor((Math.random()*keys.length))];
+            ((Math.random()*100) >= mutationIndex) ? population[i] += parents[Math.floor(Math.random()*parentsNum)][j] : population[i] += keys[Math.floor((Math.random()*keys.length))];
         }
     }
 }
@@ -101,7 +102,7 @@ window.setInterval(function(){
             isGuessing = false;
         }
         //Display the output in the codeDisplay div
-        phrase.innerText.length > 40 ? codeDisplay.children[codeDisplay.children.length-1].textContent = phrase.innerText.substring(0, 40) + '...' : codeDisplay.children[codeDisplay.children.length-1].textContent = phrase.innerText;
+        phrase.innerText.length > 80 ? codeDisplay.children[codeDisplay.children.length-1].textContent = phrase.innerText.substring(0, 80) + '...' : codeDisplay.children[codeDisplay.children.length-1].textContent = phrase.innerText;
         for (i = 0; i < codeDisplay.children.length-1; i++) {
             codeDisplay.children[i].textContent = codeDisplay.children[i+1].textContent;
         }
