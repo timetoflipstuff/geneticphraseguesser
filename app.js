@@ -14,10 +14,9 @@ const codeDisplay = document.getElementById("codeDisplay");
 
 const keys = [
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    ' ', '.', '?', '!', ',',
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'I'
-    //'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-    //'`', '~', '_', '-', '+', '=', '|', '*', '&', '^', '%', '$', '#', '@', '!', '<', '>', '.', ',', '?', ':', ';', "'",
+    ' ', '.', '?', '!', ',', "'", '-', '_', '+', '-', '=', '|', `/`, ':', ';', '@', '#', '$', '%', '^', '&', '*', '(', ')', '`', '"', '[', ']',
+    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
 ]
 
 let clearPop = () => {
@@ -48,7 +47,7 @@ let draw = (phraseLength, actualPhrase) => {
             }
         }
     }
-    // Take 2 most fitting samples
+    // Take #parentsNum most fitting samples
     let parents = [];
     let totalFitness = 0;
     fitness.forEach(item => {
@@ -69,7 +68,6 @@ let draw = (phraseLength, actualPhrase) => {
             totalFitness -= maxFitness;
         }
     }
-    console.log("Parents: " + parents);
     // Display the first parent and generation number on the HTML document
     phrase.innerText = parents[0];
     generationDisplay.innerText = "Generation: " + generationCount;
@@ -89,7 +87,7 @@ let guessPress = () => {
         setup(guessPhrase.length);
         console.log("Setup launched!");
         
-        console.log(guessPhrase);
+        console.log("Phrase to guess: " + guessPhrase);
     } else {
         phrase.innerText = "Enter something!";
     }

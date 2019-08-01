@@ -1,0 +1,9 @@
+html {
+    font-family: monospace, monospace;
+}
+
+p {
+    padding: 0;
+    margin: 2px;
+    border: 0;
+}
