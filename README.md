@@ -15,7 +15,7 @@ The ultimate goal is to make the algorithm guess the whole script of Bee Movie.
 
 ### To do:
 * ~Fix stack overflow;~
-  - Have it guess 300+ characters faster than a week;
+  - Have it guess 300+ characters faster than a week(possibly by splitting the input string into separate 20-character strings);
 * Add ' and " support, probably;
 * Optimize the code;
 * Give the good boy a better look.

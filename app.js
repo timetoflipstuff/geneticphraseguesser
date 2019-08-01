@@ -1,14 +1,16 @@
+let populationLength = 100;
+let parentsNum = 10;
+let mutationChance = 0.2;
+// Edit the parameters above to tweak the performance of the algorithm
 let population = [];
-let populationLength = 10;
-let parentsNum = 2;
 let isGuessing = false;
 let guessPhrase = '';
-
+let generationCount = 0;
 
 const phraseDisplay = document.getElementById("phraseInput");
 const phrase = document.getElementById("phrase");
 const generationDisplay = document.getElementById("generationCount");
-let generationCount = 0;
+const codeDisplay = document.getElementById("codeDisplay");
 
 const keys = [
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
@@ -80,7 +82,7 @@ let draw = (phraseLength, actualPhrase) => {
 }
 
 let guessPress = () => {
-    if (phraseDisplay.value.length>-1) {
+    if (phraseDisplay.value.length>0) {
         isGuessing = true;
         guessPhrase = phraseDisplay.value;
         setup(guessPhrase.length);
@@ -88,7 +90,7 @@ let guessPress = () => {
         
         console.log(guessPhrase);
     } else {
-        console.log("Enter something!");
+        phrase.innerText = "Enter something!";
     }
 }
 
@@ -97,6 +99,11 @@ window.setInterval(function(){
         draw(guessPhrase.length, guessPhrase);
         if (phrase.innerText == guessPhrase) {
             isGuessing = false;
+        }
+        //Display the output in the codeDisplay div
+        phrase.innerText.length > 40 ? codeDisplay.children[codeDisplay.children.length-1].textContent = phrase.innerText.substring(0, 40) + '...' : codeDisplay.children[codeDisplay.children.length-1].textContent = phrase.innerText;
+        for (i = 0; i < codeDisplay.children.length-1; i++) {
+            codeDisplay.children[i].textContent = codeDisplay.children[i+1].textContent;
         }
     }
 }, 1);
