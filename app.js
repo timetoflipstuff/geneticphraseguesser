@@ -1,6 +1,9 @@
 let population = [];
 let populationLength = 10;
 let parentsNum = 2;
+let isGuessing = false;
+let guessPhrase = '';
+
 
 const phraseDisplay = document.getElementById("phraseInput");
 const phrase = document.getElementById("phrase");
@@ -9,8 +12,10 @@ let generationCount = 0;
 
 const keys = [
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-    ' ', '`', '~', '_', '-', '+', '=', '|', '*', '&', '^', '%', '$', '#', '@', '!', '<', '>', '.', ',', '?', ':', ';'
+    ' ', '.', '?', '!', ',',
+    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'I'
+    //'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+    //'`', '~', '_', '-', '+', '=', '|', '*', '&', '^', '%', '$', '#', '@', '!', '<', '>', '.', ',', '?', ':', ';', "'",
 ]
 
 let clearPop = () => {
@@ -72,21 +77,27 @@ let draw = (phraseLength, actualPhrase) => {
             ((Math.random() * 100) > 1) ? population[i] += parents[Math.floor(Math.random()*parentsNum)][j] : population[i] += keys[Math.floor((Math.random()*keys.length))];
         }
     }
-    if (parents[0] != actualPhrase) {
-        draw(phraseLength, actualPhrase);
-    }
 }
 
-let guessingProcess = () => {
-    let guessPhrase = phraseDisplay.value;
-    console.log(guessPhrase);
-
-    if (guessPhrase) {
+let guessPress = () => {
+    if (phraseDisplay.value.length>-1) {
+        isGuessing = true;
+        guessPhrase = phraseDisplay.value;
         setup(guessPhrase.length);
         console.log("Setup launched!");
-        draw(guessPhrase.length, guessPhrase);
+        
+        console.log(guessPhrase);
     } else {
         console.log("Enter something!");
     }
 }
+
+window.setInterval(function(){
+    if (isGuessing == true) { 
+        draw(guessPhrase.length, guessPhrase);
+        if (phrase.innerText == guessPhrase) {
+            isGuessing = false;
+        }
+    }
+}, 1);
 
