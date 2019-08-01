@@ -9,7 +9,7 @@ The ultimate goal is to make the algorithm guess the whole script of Bee Movie.
 ### The algorithm currently does:
 
 1. match any phrase you type in the input field after you click the **Go!** button;
-   - 1.1. as long as it's no longer than around 30 symbols;
+   - as long as it's no longer than around 30 symbols;
 2. support uppercase, lowercase, special characters (#, $, %, ^ etc);
 3. not support ' or ".
 
